@@ -1,0 +1,45 @@
+__default__:
+  cpus_per_task: 8
+  disk_mb: 8000
+  mem: 64G
+  mem_mb: 8000
+  nodes: 1
+  output: log/log_%x_%A_%a_%j.out
+  partition: basic
+  time: 08:00:00
+binarize:
+  cpus_per_task: 8
+  output: log/log_%x_%A_%a_%j.out
+  partition: basic
+  time: 0-08:00:00
+coil_unet:
+  cpus_per_task: 24
+  gpus_per_node: 1
+  mem: 0
+  output: log/log_%x_%A_%a_%j.out
+  partition: gpu
+  time: 0-08:00:00
+create_centerline:
+  cpus_per_task: 24
+  output: log/log_%x_%A_%a_%j.out
+  partition: basic
+  time: 0-12:00:00
+dlc_analyze_videos:
+  cpus_per_task: 24
+  gpus_per_node: 1
+  mem: 0
+  output: log/log_%x_%A_%a_%j.out
+  partition: gpu
+  time: 0-08:00:00
+normalize_img:
+  cpus_per_task: 8
+  mem: 4G
+  output: log/log_%x_%A_%a_%j.out
+  partition: basic
+  time: 0-08:00:00
+subtract_background:
+  cpus_per_task: 8
+  mem: 4G
+  output: log/log_%x_%A_%a_%j.out
+  partition: basic
+  time: 0-08:00:00

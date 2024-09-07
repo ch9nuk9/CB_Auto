@@ -1,0 +1,28 @@
+blur: 1
+blur_gaussian: 5
+contour_size: 400
+dlc_model_configfile_path: /lisc/scratch/neurobiology/zimmer/ItamarLev/Code/DLC/coverslip_HR-Itamar-2020-12-10/config.yaml
+factor_px_to_mm: '0.012345679'
+fill_with_DLC: 1
+final_segment: 50
+fourcc: 0
+fps: 10
+initial_segment: 0
+inner_contour_to_fill: 50
+iterations: 1
+lower_threshold: '-0.00001'
+max_value: 255
+network_string: DLC_resnet50_coverslip_HRDec10shuffle1_1030000_filtered
+nose: head
+num_splines: 50
+number_of_neighbours: 1
+odor_pos: x=954, y=1671
+pca_model_path: /lisc/scratch/neurobiology/zimmer/ulises/code/curvature/curvature/models/1550_20230202_eigenworm_PCA_bodypart_30_to_80.pkl
+tail: tail
+threshold: 40
+tolerance: 0.5
+top_left: x=27, y=54
+turn_threshold: 0.5
+upper_threshold: '0.000001'
+ventral: left
+window: 30
