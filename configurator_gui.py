@@ -151,7 +151,7 @@ class ClusterConfigApp(QMainWindow):
         if not self.source_dir:
             QMessageBox.critical(self, "Error", "Please select a source directory.")
             return
-        required_files = ["cluster_config.yaml", "config.yaml", "Snakefile", "RUNME_cluster.sh"]
+        required_files = ["cluster_config.yaml", "config.yaml", "Snakefile", "RUNME_cluster.sh", "login.bat", "loginmobax.bat"]
         for file_name in required_files:
             src_path = os.path.join(self.source_dir, file_name)
             dest_path = os.path.join(self.dest_dir, file_name)
@@ -168,15 +168,15 @@ class ClusterConfigApp(QMainWindow):
         if not self.dest_dir:
             QMessageBox.critical(self, "Error", "Please select a destination directory.")
             return
-        shell_script = os.path.join(self.dest_dir, "RUNME_cluster.sh")
-        if not os.path.exists(shell_script):
-            QMessageBox.critical(self, "Error", "Shell script not found in the destination directory.")
+        batch_script = os.path.join(self.dest_dir, "login.bat")
+        if not os.path.exists(batch_script):
+            QMessageBox.critical(self, "Error", "Batch script not found in the destination directory.")
             return
         try:
-            subprocess.Popen(['bash', shell_script])
-            QMessageBox.information(self, "Success", "Shell script executed successfully!")
+            subprocess.Popen([batch_script], shell=True)
+            QMessageBox.information(self, "Success", "Batch script executed successfully!")
         except Exception as e:
-            QMessageBox.critical(self, "Error", f"Failed to execute shell script: {e}")
+            QMessageBox.critical(self, "Error", f"Failed to execute batch script: {e}")
 
     # Edit configuration files
     def edit_config(self, config_file):
