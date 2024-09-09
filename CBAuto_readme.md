@@ -12,7 +12,7 @@ The `configurator_gui.py` script is a graphical interface tool designed to allow
 - **Select source and destination directories**.
 - **Copy required configuration files** (such as `cluster_config.yaml`, `config.yaml`, `Snakefile`, and `RUNME_cluster.sh`) from the source to the destination directory.
 - **Edit configuration files** (`cluster_config.yaml` and `config.yaml`) directly within the application, with the ability to save changes back to the destination directory.
-- **Execute the `RUNME_cluster.sh` script**, which is copied from the source to the destination directory, using a simple button click.
+- **Execute the HCCional functions**, via a simple button click.
 - **Launch the Thresholding GUI**, which provides image processing capabilities (more details below).
 
 The script provides a **dark-themed** interface with large buttons and input fields for easy interaction.
