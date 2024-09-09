@@ -1,0 +1,11 @@
+numpy
+pandas
+PyQt5
+PyQt6
+opencv-python
+Pillow
+tifffile
+matplotlib
+plotly
+seaborn
+pyyaml
