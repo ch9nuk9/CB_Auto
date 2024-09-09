@@ -3,10 +3,11 @@ import os
 import yaml
 import subprocess
 import shutil
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QLabel, QLineEdit, QVBoxLayout,
+import platform  # To detect the OS
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QLabel, QLineEdit, QVBoxLayout, # type: ignore
                              QWidget, QHBoxLayout, QFileDialog, QGroupBox, QMessageBox, QTextEdit, QDialog, QDialogButtonBox)
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QFont
+from PyQt5.QtCore import Qt # type: ignore
+from PyQt5.QtGui import QFont # type: ignore
 
 class ClusterConfigApp(QMainWindow):
     def __init__(self):
@@ -151,7 +152,7 @@ class ClusterConfigApp(QMainWindow):
         if not self.source_dir:
             QMessageBox.critical(self, "Error", "Please select a source directory.")
             return
-        required_files = ["cluster_config.yaml", "config.yaml", "Snakefile", "RUNME_cluster.sh", "login.bat", "loginmobax.bat"]
+        required_files = ["cluster_config.yaml", "config.yaml", "Snakefile", "RUNME_cluster.sh", "login.bat", "loginmobax.bat", "login.sh"]  # Added login.sh
         for file_name in required_files:
             src_path = os.path.join(self.source_dir, file_name)
             dest_path = os.path.join(self.dest_dir, file_name)
@@ -163,20 +164,33 @@ class ClusterConfigApp(QMainWindow):
                 return
         QMessageBox.information(self, "Success", "Files copied to the destination directory!")
 
-    # Execute the shell script
+    # Execute the shell script or batch script based on OS
     def execute_pipeline(self):
         if not self.dest_dir:
             QMessageBox.critical(self, "Error", "Please select a destination directory.")
             return
-        batch_script = os.path.join(self.dest_dir, "login.bat")
-        if not os.path.exists(batch_script):
-            QMessageBox.critical(self, "Error", "Batch script not found in the destination directory.")
+
+        # Detect the platform
+        if platform.system() == "Windows":
+            # For Windows, run the batch script
+            script = os.path.join(self.dest_dir, "login.bat")
+        else:
+            # For macOS/Linux, run the shell script
+            script = os.path.join(self.dest_dir, "login.sh")
+
+        if not os.path.exists(script):
+            QMessageBox.critical(self, "Error", f"Script not found: {script}")
             return
+        
         try:
-            subprocess.Popen([batch_script], shell=True)
-            QMessageBox.information(self, "Success", "Batch script executed successfully!")
+            # Use subprocess to execute the script
+            if platform.system() == "Windows":
+                subprocess.Popen([script], shell=True)  # Use shell=True for Windows
+            else:
+                subprocess.Popen(['bash', script])  # Use bash to run shell script on macOS/Linux
+            QMessageBox.information(self, "Success", f"Script {script} executed successfully!")
         except Exception as e:
-            QMessageBox.critical(self, "Error", f"Failed to execute batch script: {e}")
+            QMessageBox.critical(self, "Error", f"Failed to execute script: {e}")
 
     # Edit configuration files
     def edit_config(self, config_file):
