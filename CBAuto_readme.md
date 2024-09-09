@@ -27,7 +27,7 @@ The script provides a **dark-themed** interface with large buttons and input fie
 ### How It Works:
 1. **Directory Selection**: Once the user selects the source and destination directories, the required files are automatically copied to the destination.
 2. **Configuration Editing**: Two buttons, "Edit Cluster Configuration" and "Edit Platform Configuration," allow the user to load the configuration files into a text editor within the app.
-3. **Shell Script Execution**: The "Execute" button runs the `RUNME_cluster.sh` script in the destination directory.
+3. **Shell/batch Script Execution**: The "Execute" button runs the `login.bat ` (Windows) or `login.sh` (Mac) depending on the users OS, prompting the user to ssh into their user account on HCC, then the user needs to cd into the root (now destination) directory and run the `RUNME_cluster.sh` script. This will automatically push the job to the cluster and the analysis will be performed in accordance with the configurations specified by the user. 
 4. **Launch Thresholding GUI**: The "Open Thresholding GUI" button opens the `thresholding_gui.py` script.
 
 ### Requirements:
